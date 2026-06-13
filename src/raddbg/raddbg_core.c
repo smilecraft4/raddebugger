@@ -8937,7 +8937,26 @@ rd_window_frame(void)
     
     //- rjf: draw background color
     {
-      dr_rect(wm_client_rect_from_window(ws->os), base_background_color, 0, 0, 0);
+      // dr_rect(wm_client_rect_from_window(ws->os), base_background_color, 0, 0, 0);
+      
+      // Render a beautiful picture of a waifu (￣y▽￣)╭ Ohohoho....
+      R_Handle texture = rd_state->background_texture;
+      Vec2S32 texture_dim = r_size_from_tex2d(texture);
+      Rng2F32 window_rect = wm_client_rect_from_window(ws->os);
+      Rng2F32 src = {0};
+       
+      F32 window_aspect = window_rect.x1 / window_rect.y1;
+      if(window_aspect > 1.f) {
+        src.x1 = texture_dim.x;
+        src.y1 = texture_dim.y / window_aspect;
+      } else {
+        src.x1 = texture_dim.x * window_aspect;      
+        src.y1 = texture_dim.y;
+      }
+
+      Vec4F32 background_image_color = {1.f, 1.f, 1.f, 1.f};
+      dr_img(window_rect, src, texture, background_image_color, 0, 0, 0);
+      dr_rect(window_rect, base_background_color, 0, 0, 0);
     }
     
     //- rjf: draw window border
@@ -11111,7 +11130,18 @@ rd_init(CmdLine *cmdln)
     stbi_image_free(image_data);
     scratch_end(scratch);
   }
-  
+
+  {
+    Vec2S32 image_dim = {0};
+    int components = 0;
+    String8 data = rd_background_file_bytes;
+    U8* image_data = stbi_load_from_memory(data.str, data.size, &image_dim.x, &image_dim.y, &components, 4);
+
+    rd_state->background_texture = r_tex2d_alloc(R_ResourceKind_Static, image_dim, R_Tex2DFormat_RGBA8, image_data);
+
+    stbi_image_free(image_data);
+  }
+
   ProfEnd();
   scratch_end(scratch);
 }

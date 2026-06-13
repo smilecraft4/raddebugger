@@ -15,6 +15,7 @@
 @embed_file rd_default_code_font_bytes: "../data/JetBrainsMono-Regular.ttf"
 
 @embed_file rd_icon_file_bytes:         "../data/logo.ico"
+@embed_file rd_background_file_bytes:   "../data/background.png"
 
 ////////////////////////////////
 //~ rjf: Fixed Tab Tables

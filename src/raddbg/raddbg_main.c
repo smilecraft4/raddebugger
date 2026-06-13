@@ -349,7 +349,7 @@
 ////////////////////////////////
 //~ rjf: Build Options
 
-#define BUILD_TITLE "The RAD Debugger"
+#define BUILD_TITLE "The RAD Debugger (Forked)"
 #define OS_FEATURE_GRAPHICAL 1
 
 #define DMN_INIT_MANUAL 1

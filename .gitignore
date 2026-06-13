@@ -3,3 +3,7 @@
 *~
 .vs
 tags
+
+# for copyright reason
+data/background.png
+src/raddbg/generated/raddbg.meta.h

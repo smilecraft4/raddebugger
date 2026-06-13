@@ -517,6 +517,7 @@ struct RD_State
   
   // rjf: icon texture
   R_Handle icon_texture;
+  R_Handle background_texture;
   
   // rjf: fixed ui keys
   UI_Key drop_completion_key;
